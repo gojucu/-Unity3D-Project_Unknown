@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5fa478f6af5644cbf80726bcb20885, type: 3}
+  m_Name: Power Attack L1
+  m_EditorClassIdentifier: 
+  energyCost: 10
+  particlePrefab: {fileID: 1990009359243766, guid: 21f9aff1211cd4e498e62d98c2e3e6f4,
+    type: 2}
+  abilityAnimation: {fileID: 7400000, guid: c988ad92eb32ce54e891d59ec6bb5223, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: d526a291b5603684f98048d8c4633c6d, type: 3}
+  extraDamage: 10

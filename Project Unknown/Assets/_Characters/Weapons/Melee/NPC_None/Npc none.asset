@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5450615a2f684408ac6ae8050d0639, type: 3}
+  m_Name: Npc none
+  m_EditorClassIdentifier: 
+  gripTransform: {fileID: 4282148412600112, guid: e214b3aef3fc7fa4ea1099594456c689,
+    type: 2}
+  weaponPrefab: {fileID: 1871956967568624, guid: ac5a6acd6fe3a2e43a96f721dddb110a,
+    type: 2}
+  attackAnimation: {fileID: 7400000, guid: 053ec18f067de0a4c9650802e1995cb6, type: 3}
+  timeBetweenAnimationCycles: 0.5
+  maxAttackRange: 0
+  additionalDamage: 0
+  damageDelay: 1
