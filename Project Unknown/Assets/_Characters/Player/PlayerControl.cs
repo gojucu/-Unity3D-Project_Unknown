@@ -12,12 +12,15 @@ namespace RPG.Characters {
         SpecialAbilities abilities;
         WeaponSystem weaponSystem;
 
-       
+        [SerializeField] GameObject projectileToUse;
+        [SerializeField] GameObject projectileSocket;
+        [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
-        
-        
+        EnemyAI enemyAI = null;
+
         void Start()
         {
+            enemyAI = FindObjectOfType<EnemyAI>();
             character = GetComponent<Character>();
             abilities = GetComponent<SpecialAbilities>();
             weaponSystem = GetComponent<WeaponSystem>();
@@ -78,14 +81,28 @@ namespace RPG.Characters {
             {
                 StartCoroutine(MoveAndAttack(enemy));
             }
-            else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy.gameObject))
+            else if (Input.GetMouseButtonDown(1) )
             {
                 abilities.AttemptSpecialAbility(0, enemy.gameObject);
+                FireProjectile();
             }
-            else if (Input.GetMouseButtonDown(1) && !IsTargetInRange(enemy.gameObject))
-            {
-                StartCoroutine(MoveAndPowerAttack(enemy));
-            }
+        }
+
+        void FireProjectile()
+        {
+            GameObject newProjectile;
+            Projectile projectileComponent;
+            SpawnProjectile(out newProjectile, out projectileComponent);
+
+            Vector3 unitVectorToPlayer = (enemyAI.transform.position + aimOffset - projectileSocket.transform.position).normalized;
+            float projectileSpeed = projectileComponent.GetDefaultLaunchSpeed();
+            newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
+        }
+        private void SpawnProjectile(out GameObject newProjectile, out Projectile projectileComponent)
+        {
+            newProjectile = Instantiate(projectileToUse, projectileSocket.transform.position, Quaternion.identity);
+            projectileComponent = newProjectile.GetComponent<Projectile>();
+            projectileComponent.SetShooter(gameObject);
         }
 
         IEnumerator MoveToTarget(GameObject target)
@@ -103,11 +120,11 @@ namespace RPG.Characters {
             weaponSystem.AttackTarget(enemy.gameObject);
         }
 
-        IEnumerator MoveAndPowerAttack(EnemyAI enemy)
-        {
-            yield return StartCoroutine(MoveToTarget(enemy.gameObject));
-            abilities.AttemptSpecialAbility(0, enemy.gameObject);
-        }
+        //IEnumerator MoveAndPowerAttack(EnemyAI enemy)
+        //{
+        //    yield return StartCoroutine(MoveToTarget(enemy.gameObject));
+        //    abilities.AttemptSpecialAbility(0, enemy.gameObject);
+        //}
 
 
     }
