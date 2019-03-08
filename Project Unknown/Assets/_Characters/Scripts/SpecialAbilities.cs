@@ -10,7 +10,11 @@ namespace RPG.Characters
         [SerializeField] Image energyBar;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 1f;
-        
+
+        [SerializeField] GameObject projectileToUse;
+        [SerializeField] GameObject projectileSocket;
+        [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
+
         [SerializeField] AudioClip outOfEnergy;
 
         float currentEnergyPoints;
@@ -18,9 +22,11 @@ namespace RPG.Characters
 
         float energyAsPercent { get { return currentEnergyPoints / maxEnergyPoints; } }
 
+        EnemyAI enemyAI = null;
         // Use this for initialization
         void Start()
         {
+            enemyAI = FindObjectOfType<EnemyAI>();
             audioSource = GetComponent<AudioSource>();
 
             currentEnergyPoints = maxEnergyPoints;
@@ -54,11 +60,31 @@ namespace RPG.Characters
             {
                 ConsumeEnergy(energyCost);
                 abilities[abilityIndex].Use(target);
+                if (abilityIndex == 0)
+                {
+                    FireProjectile();
+                }
             }
             else
             {
                 audioSource.PlayOneShot(outOfEnergy);
             }
+        }
+        void FireProjectile()
+        {
+            GameObject newProjectile;
+            Projectile projectileComponent;
+            SpawnProjectile(out newProjectile, out projectileComponent);
+
+            Vector3 unitVectorToPlayer = (enemyAI.transform.position + aimOffset - projectileSocket.transform.position).normalized;
+            float projectileSpeed = projectileComponent.GetDefaultLaunchSpeed();
+            newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
+        }
+        private void SpawnProjectile(out GameObject newProjectile, out Projectile projectileComponent)
+        {
+            newProjectile = Instantiate(projectileToUse, projectileSocket.transform.position, Quaternion.identity);
+            projectileComponent = newProjectile.GetComponent<Projectile>();
+            projectileComponent.SetShooter(gameObject);
         }
 
         public int GetNumberOfAbilities()
