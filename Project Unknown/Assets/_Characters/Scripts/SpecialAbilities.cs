@@ -21,12 +21,10 @@ namespace RPG.Characters
         AudioSource audioSource;
 
         float energyAsPercent { get { return currentEnergyPoints / maxEnergyPoints; } }
-
-        EnemyAI enemyAI = null;
+        
         // Use this for initialization
         void Start()
         {
-            enemyAI = FindObjectOfType<EnemyAI>();
             audioSource = GetComponent<AudioSource>();
 
             currentEnergyPoints = maxEnergyPoints;
@@ -53,7 +51,7 @@ namespace RPG.Characters
 
         public void AttemptSpecialAbility(int abilityIndex, GameObject target = null)
         {
-            var energyComponent = GetComponent<SpecialAbilities>();
+            //var energyComponent = GetComponent<SpecialAbilities>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();
 
             if (energyCost <= currentEnergyPoints)
@@ -62,7 +60,7 @@ namespace RPG.Characters
                 abilities[abilityIndex].Use(target);
                 if (abilityIndex == 0)
                 {
-                    FireProjectile();
+                    FireProjectile(target);
                 }
             }
             else
@@ -70,13 +68,13 @@ namespace RPG.Characters
                 audioSource.PlayOneShot(outOfEnergy);
             }
         }
-        void FireProjectile()
+        void FireProjectile(GameObject target)
         {
             GameObject newProjectile;
             Projectile projectileComponent;
             SpawnProjectile(out newProjectile, out projectileComponent);
 
-            Vector3 unitVectorToPlayer = (enemyAI.transform.position + aimOffset - projectileSocket.transform.position).normalized;
+            Vector3 unitVectorToPlayer = (target.transform.position + aimOffset - projectileSocket.transform.position).normalized;
             float projectileSpeed = projectileComponent.GetDefaultLaunchSpeed();
             newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
         }

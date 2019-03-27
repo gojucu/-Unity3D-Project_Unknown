@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: AreaEffect L1
   m_EditorClassIdentifier: 
   energyCost: 20
-  particlePrefab: {fileID: 1977060658541122, guid: ddb9eccb541f52c4d91b421e9aba766d,
+  particlePrefab: {fileID: 1179809721236326, guid: 6e81ad7b6d010274ca07c5c894fe9e6b,
     type: 2}
-  abilityAnimation: {fileID: 7400000, guid: 9d4050b41f686a947b403b85bcf73ca7, type: 3}
+  abilityAnimation: {fileID: 7400000, guid: b825a56aacb9490449b35124afe6b549, type: 3}
   audioClips:
-  - {fileID: 8300000, guid: 7ddd038e6cec6c24480f03024c735e47, type: 3}
+  - {fileID: 8300000, guid: 21fc9e37a8fe04a32a8ed376a21b5cd9, type: 3}
   radius: 10
-  damageToEachTarget: 40
+  damageToEachTarget: 30

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5450615a2f684408ac6ae8050d0639, type: 3}
+  m_Name: Steampunkv1
+  m_EditorClassIdentifier: 
+  gripTransform: {fileID: 4282148412600112, guid: dc775920abf53334d9f87e69cf0e24f6,
+    type: 2}
+  weaponPrefab: {fileID: 1598520127278420, guid: 5727866be12b1bf49b89c63e97703af2,
+    type: 2}
+  attackAnimation: {fileID: 7400000, guid: dce280ced5e006c4cb0eb0fab2f51b75, type: 3}
+  timeBetweenAnimationCycles: 0.1
+  maxAttackRange: 5
+  additionalDamage: 10
+  damageDelay: 0.5
